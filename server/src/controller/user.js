@@ -11,9 +11,13 @@ exports.getUser = async (request, response) => {
 
     response.send({
       status: "success",
-      data,
+      user: data,
     });
   } catch (error) {
     console.log(error);
+    res.send({
+      status: "failed",
+      message: "Server Error",
+    });
   }
 };

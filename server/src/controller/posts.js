@@ -38,8 +38,8 @@ exports.getAllPost = async (request, response) => {
 };
 
 exports.getPost = async (request, response) => {
-  let { id } = request.params;
   try {
+    let { id } = request.params;
     let data = await tb_post.findOne({
       where: {
         id,
@@ -178,6 +178,15 @@ exports.deletePost = async (request, response) => {
       where: {
         id,
       },
+      attributes: ["thumbnail"],
+    });
+
+    let thumbnailFile = "uploads/" + blog.thumbnail;
+
+    // Delete thumbnail file
+    fs.unlink(thumbnailFile, (err) => {
+      if (err) console.log(err);
+      else console.log("\nDeleted file: " + thumbnailFile);
     });
 
     await tb_post.destroy({
@@ -187,11 +196,16 @@ exports.deletePost = async (request, response) => {
     });
     response.send({
       status: "succees",
+      message: `Deleted Post id: ${id}`,
+      data: {
+        id,
+      },
     });
   } catch (error) {
     console.log(error);
     response.send({
       status: "failed",
+      message: "Server Error",
     });
   }
 };
