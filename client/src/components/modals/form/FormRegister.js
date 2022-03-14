@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Decoration from "../../../assets/icons/login-leaf-icon.png";
 import DecorationMap from "../../../assets/icons/login-pin-icon.png";
+import { ModalLoginContext } from "../../../context/context";
+import { LockClosedIcon } from "@heroicons/react/solid";
 
 import { API } from "../../../config/api";
 
 const FormRegister = () => {
+  const [openModalLogin, setOpenModalLogin] = useContext(ModalLoginContext);
   const [message, setMessage] = useState(null);
   const [form, setForm] = useState({
     name: "",
@@ -37,10 +40,10 @@ const FormRegister = () => {
       if (response.data.status === "success") {
         const alert = (
           <div
-            className="flex items-center bg-green-600 rounded-md text-white text-sm px-4 py-3"
+          className="flex justify-center items-center rounded-md bg-green-600 text-white text-sm font-bold px-4 py-3"
             role="alert"
           >
-            <p>Successfully registered</p>
+            <p>Successfully Registered</p>
           </div>
         );
         setMessage(alert);
@@ -53,7 +56,7 @@ const FormRegister = () => {
       } else {
         const alert = (
           <div
-            className="flex justify-center items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+          className="flex justify-center items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
             role="alert"
           >
             <p>{response.message}</p>
@@ -65,10 +68,10 @@ const FormRegister = () => {
     } catch (error) {
       const alert = (
         <div
-          className="flex justify-center items-center rounded-md text-red-600 border border-red-600 text-sm font-bold px-4 py-3"
+        className="flex justify-center items-center rounded-md bg-red-600 text-white text-sm font-bold px-4 py-3"
           role="alert"
         >
-          <p>Register Failed Try Again</p>
+          <p>Register Failed Try Again!</p>
         </div>
       );
       console.log(error);
@@ -98,6 +101,16 @@ const FormRegister = () => {
               />
             </label>
             <label htmlFor="name" className="flex flex-col font-bold md:mb-2">
+              Phone Number
+              <input
+                name="phone"
+                value={phone}
+                onChange={handleChange}
+                type="text"
+                className="border-2 py-1 px-2 rounded"
+              />
+            </label>
+            <label htmlFor="name" className="flex flex-col font-bold md:mb-2">
               Email
               <input
                 name="email"
@@ -117,23 +130,31 @@ const FormRegister = () => {
                 className="border-2 py-1 px-2 rounded"
               />
             </label>
-            <label htmlFor="name" className="flex flex-col font-bold md:mb-2">
-              Phone Number
-              <input
-                name="phone"
-                value={phone}
-                onChange={handleChange}
-                type="text"
-                className="border-2 py-1 px-2 rounded"
-              />
-            </label>
 
-            <button
-              type="submit"
-              className="md:my-4 w-full md:py-2 bg-blueSea rounded text-white"
-            >
-              Register
-            </button>
+            <div className="text-center mt-4">
+              <button
+                type="submit"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blueSea hover:bg-brand-red"
+              >
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <LockClosedIcon
+                    className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                    aria-hidden="true"
+                  />
+                </span>
+                Register
+              </button>
+              <p className="font-['Avenir-Book'] mt-3">
+                Already have an account?{" "}
+                <button
+                  type="button"
+                  className="font-bold hover:text-red-500"
+                  onClick={() => setOpenModalLogin(!openModalLogin)}
+                >
+                  Click Here
+                </button>
+              </p>
+            </div>
           </form>
         </div>
       </div>

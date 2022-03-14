@@ -2,13 +2,17 @@ import React, { useContext, useState } from "react";
 import Decoration from "../../../assets/icons/login-leaf-icon.png";
 import DecorationMap from "../../../assets/icons/login-pin-icon.png";
 import { UserContext } from "../../../context/userContext";
-import { LoginContext, ModalLoginContext } from "../../../context/context";
+import { LoginContext, ModalLoginContext, ModalRegisterContext } from "../../../context/context";
 import { API } from "../../../config/api";
+import { LockClosedIcon } from "@heroicons/react/solid";
 
 const FormLogin = () => {
+  const [openModalRegister, setOpenModalRegister] = useContext(ModalRegisterContext)
   const [openModalLogin, setOpenModalLogin] = useContext(ModalLoginContext);
   const [login, setLogin] = useContext(LoginContext);
   const [state, dispatch] = useContext(UserContext);
+  const [message, setMessage] = useState(null);
+
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -37,6 +41,15 @@ const FormLogin = () => {
 
       if (response?.status === 200) {
         // Send data to useContext
+        const alert = (
+          <div
+            class="flex items-center text-white bg-green-500 rounded-lg py-2 text-md justify-center font-bold"
+            role="alert"
+          >
+            <p>Login Success</p>
+          </div>
+        );
+        setMessage(alert);
         dispatch({
           type: "LOGIN_SUCCESS",
           payload: response.data.data.user,
@@ -44,20 +57,17 @@ const FormLogin = () => {
 
         setLogin(!login);
         setOpenModalLogin(!openModalLogin);
-
-        // setOpen(false);
-        // // Status check
-        // if (response.data.data.user.status === "admin") {
-        //   navigate("/");
-        //   setAdmin(true);
-        // } else {
-        //   navigate("/");
-        //   setAdmin(false);
-        //   console.log(response);
-        //   // console.log(response);
-        // }
       }
     } catch (error) {
+      const alert = (
+        <div
+          class="flex items-center text-white bg-red-500 rounded-lg py-2 text-md justify-center font-bold"
+          role="alert"
+        >
+          <p>Failed To login. Try Again</p>
+        </div>
+      );
+      setMessage(alert);
       console.log(error);
     }
   };
@@ -69,7 +79,7 @@ const FormLogin = () => {
         <div className="md:my-8">
           <h1 className="text-3xl text-center font-semibold">Login</h1>
         </div>
-
+        {message && message}
         <div className="md:mx-20 md:my-16">
           <form onSubmit={handleSubmit}>
             <label htmlFor="name" className="flex flex-col font-bold md:mb-2">
@@ -93,12 +103,27 @@ const FormLogin = () => {
               />
             </label>
 
-            <button
-              type="submit"
-              className="md:my-4 w-full md:py-2 bg-blueSea rounded text-white"
-            >
-              Login
-            </button>
+            <div className="text-center">
+              <button className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blueSea hover:bg-brand-red">
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <LockClosedIcon
+                    className="h-5 w-5 text-red-500 group-hover:text-red-400"
+                    aria-hidden="true"
+                  />
+                </span>
+                Login
+              </button>
+              <p className="font-['Avenir-Book'] mt-3">
+                Don't have an account?{" "}
+                <button
+                  type="button"
+                  className="font-bold hover:text-red-500"
+                  onClick={() => setOpenModalRegister(!openModalRegister)}
+                >
+                  Click Here
+                </button>
+              </p>
+            </div>
           </form>
         </div>
       </div>
