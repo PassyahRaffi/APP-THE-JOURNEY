@@ -69,7 +69,7 @@ const Bookmark = () => {
   return (
     <div className="md:w-9/12 md:m-auto">
       <div className="md:mt-10">
-        <h1 className="text-3xl mb-8">My Bookmark</h1>
+        <h1 className="text-3xl mb-8 font-bold">My Bookmark</h1>
       </div>
 
       <Snackbar
@@ -80,12 +80,12 @@ const Bookmark = () => {
         action={action}
       />
 
-      <div className="grid grid-cols-4 gap-8 relative">
+      <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
         {post.map((items, index) => (
-          <div className="relative shadow-lg">
+          <div className="relative rounded overflow-hidden shadow-lg h-full">
             <div
               onClick={() => handleBookmark(items.id)}
-              className="absolute z-10 top-48 right-0 cursor-pointer"
+              className="absolute z-10 right-0 cursor-pointer"
             >
               <img onClick={handleClick} src={BookmarkImage} alt="" />
             </div>
@@ -95,19 +95,19 @@ const Bookmark = () => {
                   <img
                     src={path + items.bookmark.thumbnail}
                     alt=""
-                    className="h-44 w-full object-cover"
+                    className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="md:mt-4">
-                  <h3 className="text-xl">{items.bookmark.title}</h3>
+                <div className="px-6 pt-4">
+                  <h3 className="text-xl mb-1 font-bold line-clamp-1">{items.bookmark.title}</h3>
                 </div>
-                <div className="">
-                  <p className="text-gray-500">
+                <div className="px-6">
+                  <p className="text-gray-500 line-clamp-1">
                     {dateFormat(items.createdAt, "mediumDate")}, {""}
                     {items.bookmark.user.name}
                   </p>
                 </div>
-                <div className="md:my-4">
+                <div className="px-6 md:my-6">
                   <p className="line-clamp-3">
                     {parse(items.bookmark.description)}
                   </p>

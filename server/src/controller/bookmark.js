@@ -41,11 +41,7 @@ exports.deleteBookmark = async (request, response) => {
 exports.getBookmarkuser = async (request, response) => {
   try {
     const { id } = request.params;
-    // let dataUser = await tb_user.findOne({
-    //   where: {
-    //     id,
-    //   },
-    // });
+
     let bookmarkData = await tb_bookmark.findAll({
       where: {
         idUser: id,
@@ -69,14 +65,6 @@ exports.getBookmarkuser = async (request, response) => {
         },
       ],
     });
-
-    // bookmarkData = JSON.parse(JSON.stringify(bookmarkData));
-    // bookmarkData = bookmarkData.map((item) => {
-    //   return {
-    //     ...item,
-    //     thumbnail: process.env.FILE_PATH + item.thumbnail,
-    //   };
-    // });
 
     response.send({
       status: "success",
