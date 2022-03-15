@@ -1,6 +1,5 @@
 import React from "react";
 import AllPost from "../components/AllPost";
-import SearchBox from "../components/SearchBox";
 
 const Post = () => {
   return (
