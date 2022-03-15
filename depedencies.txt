@@ -1,0 +1,37 @@
+
+Dependencies
+
+tailwind-css
+TailwindCss = sebuah utility framework yang didalamnya banyak class2,
+semuanya dapat kita buat tanpa meninggalkan structure html kita
+dirilis Adam Wathan 1 November 2017
+utility-first = class yang berfungsi mendefinisikan styless yang disediakan
+oleh framework tailwind
+
+Bootstrap           TAILWIND
+UI FRAMEWORK        UTILITY FIRST
+
+@ckeditor/ckeditor5-react
+
+@emotion/react
+@heroicons/react
+Axios
+Dompurify
+html-react-parser
+jodit-react
+
+--------------------------------------
+
+
+Dependencies
+
+bcrypt
+concurrently
+cors
+dotenv
+Express
+joi
+jsonwebtoken
+multer
+mysql2
+Sequelize-cli
