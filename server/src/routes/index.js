@@ -9,8 +9,18 @@ router.post("/register", register);
 router.post("/login", login);
 router.get("/check-auth", auth, checkAuth);
 
-const { getUser } = require("../controller/user");
+const {
+  addUsers,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+} = require("../controller/user");
+router.post("/user", addUsers);
+router.get("/users", getUsers);
 router.get("/getUser/:id", getUser);
+router.patch("/user/:id", auth, updateUser);
+router.delete("/user/:id", auth, deleteUser);
 
 const {
   addPost,
