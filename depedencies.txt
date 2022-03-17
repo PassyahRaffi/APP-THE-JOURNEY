@@ -15,12 +15,17 @@ oleh framework tailwind seperti css murni dengan gaya inline
 #@ckeditor/ckeditor5-react
 adalah sebuah build yang saya gunakan untuk add new journey diweb nanti
 
-#@emotion/react
 #@heroicons/react
+saya gunakan untuk icon nanti di modal register dan login
+
 #Axios
+saya gunakan untuk request data melalui http. di client side
+
 #Dompurify
+saya gunakan untuk membersihkan HTML dan menghapus beberapa konten tag yg terbawa pada pengiriman data text dari #@ckeditor/ckeditor5-react kehalaman web
+
 #html-react-parser
-#jodit-react
+sebuah Utilitas yang digunakan untuk mengubah string HTML menjadi komponen React .
 
 --------------------------------------
 
@@ -28,12 +33,31 @@ adalah sebuah build yang saya gunakan untuk add new journey diweb nanti
 Dependencies
 
 #bcrypt
+untuk hashed password user
+
 #concurrently
+untuk menJalankan beberapa perintah secara bersamaan diserver seperti npm run dev
+
 #cors
+mekanisme untuk mengizinkan sumber daya yang diminta pada server web di mana permintaan HTTP dimulai.
+
 #dotenv
+env (dotenv) berfungsi untuk menyimpan variabel env. File ini berisi deklarasi atau pembuatan variabel env yang nantinya dapat kita load dari Nodejs.
+
 #Express
+framework dari NodeJS yang digunakan untuk membangun aplikasi dari sisi back end secara efektif
+
 #joi
+library javascript yang sangat membantu dalam melakukan validasi request pada pemrograman javascript.
+
 #jsonwebtoken
+untuk integritas data yang dikirim (Data yang ada di dalam token). yang dapat digunakan untuk otentikasi/otorisasi aplikasi
+
 #multer
+middleware node.js untuk menangani multipart/form data , yang saya gunakan untuk mengunggah file
+
 #mysql2
+ini adalah data warehousing (gudang data) saya, untuk pengumpulan aplikasi ini
+
 #Sequelize-cli
+atau ORM - Object Relational Mapping, adalah sebuah teknik untuk mengubah data dari database ke dalam object yang sesuai dengan bahasa yang dipakai, ini saya gunakan untuk mengcrete,generate,undo dll saat saya menggunakan mysql2

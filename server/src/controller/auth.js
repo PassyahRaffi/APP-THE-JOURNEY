@@ -7,10 +7,10 @@ const jwt = require("jsonwebtoken");
 exports.register = async (request, response) => {
   // Joi scheme
   const scheme = joi.object({
-    name: joi.string().min(3).required(),
-    email: joi.string().required(),
-    password: joi.string().min(3).required(),
-    phone: joi.number().required(),
+    name: joi.string().min(4).required(),
+    phone: joi.number().min(6).required(),
+    email: joi.string().min(6).required(),
+    password: joi.string().min(4).required(),
   });
 
   const { error } = scheme.validate(request.body);
@@ -34,7 +34,7 @@ exports.register = async (request, response) => {
     if (existUser) {
       return response.status(400).send({
         status: "failed",
-        message: "user exists",
+        message: "Email Already Registered!",
       });
     }
 
@@ -43,9 +43,9 @@ exports.register = async (request, response) => {
 
     const newUser = await tb_user.create({
       name: request.body.name,
+      phone: request.body.phone,
       email: request.body.email,
       password: hashedPassword,
-      phone: request.body.phone,
     });
 
     const token = jwt.sign(
@@ -58,25 +58,32 @@ exports.register = async (request, response) => {
       process.env.JWT_KEY
     );
 
-    response.send({
+    const user = {
+      name: newUser.name,
+      email: newUser.email,
+      phone: newUser.phone,
+      token,
+    };
+
+    response.status(200).send({
       status: "success",
-      message: "register success",
+      message: "Register Success!",
       data: {
-        token,
+        user
       },
     });
   } catch (error) {
     console.log(error);
-    response.send({
+    response.status(500).send({
       status: "failed",
-      message: "server error",
+      message: "Server Error!",
     });
   }
 };
 
 exports.login = async (request, response) => {
   const scheme = joi.object({
-    email: joi.string().required(),
+    email: joi.string().email().min(6).required(),
     password: joi.string().min(4).required(),
   });
 
@@ -102,7 +109,7 @@ exports.login = async (request, response) => {
     if (!existUser) {
       return response.status(400).send({
         status: "failed",
-        message: "register first",
+        message: "Email Is Not Registered!",
       });
     }
 
@@ -113,7 +120,7 @@ exports.login = async (request, response) => {
     if (!isValid) {
       return response.status(400).send({
         status: "failed",
-        message: "password salah",
+        message: "Password Incorrect!",
       });
     }
 
@@ -122,27 +129,28 @@ exports.login = async (request, response) => {
       id: existUser.id,
       name: existUser.name,
       email: existUser.email,
+      phone: existUser.phone,
       image: existUser.image,
       token,
     };
 
-    response.send({
+    response.status(200).send({
       status: "succes",
-      message: "success",
+      message: "Success!",
       data: { user },
     });
   } catch (error) {
     console.log(error);
-    response.send({
+    response.status(500).send({
       status: "failed",
-      message: "server error",
+      message: "Server Error!",
     });
   }
 };
 
-exports.checkAuth = async (req, res) => {
+exports.checkAuth = async (request, response) => {
   try {
-    const id = req.tb_user.id;
+    const id = request.tb_user.id;
 
     const dataUser = await tb_user.findOne({
       where: {
@@ -154,26 +162,27 @@ exports.checkAuth = async (req, res) => {
     });
 
     if (!dataUser) {
-      return res.status(404).send({
-        status: "Failed",
+      return response.status(404).send({
+        status: "failed",
       });
     }
 
-    res.send({
-      status: "Success",
+    response.send({
+      status: "success",
       data: {
         user: {
           id: dataUser.id,
-          name: dataUser.fullname,
+          name: dataUser.name,
           email: dataUser.email,
+          phone: dataUser.phone,
         },
       },
     });
   } catch (error) {
     console.log(error);
-    res.status({
-      status: "Failed",
-      message: "Server Error",
+    response.status({
+      status: "failed",
+      message: "Server Error!",
     });
   }
 };
