@@ -46,34 +46,36 @@ exports.getBookmarkuser = async (request, response) => {
       where: {
         idUser: id,
       },
-      attributes: {
-        exclude: ["createdAt", "updatedAt"],
-      },
       include: [
         {
           model: tb_post,
           as: "bookmark",
-          attributes: {
-            exclude: ["createdAt", "updatedAt"],
-          },
           include: [
             {
               model: tb_user,
               as: "user",
+              attributes: {
+                exclude: ["createdAt", "updatedAt", "password"], /* new */
+              },
             },
           ],
+          attributes: {
+            exclude: ["idUser"], /* new */
+          },
         },
       ],
     });
 
     response.send({
       status: "success",
+      message: "Get User Bookmark Success!", /* new */
       bookmarkData,
     });
   } catch (error) {
     console.log(error);
-    response.send({
-      message: "server error",
+    response.status(500).send({
+      status: "failed", /* new */
+      message: "Get Data Bookmark Error!", /* new */
     });
   }
 };

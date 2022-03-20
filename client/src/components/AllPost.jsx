@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 
 import { API } from "../config/api";
 
-export default function Posts() {
+export default function AllPost() {
   const [post, setPost] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = useState("");
@@ -89,7 +89,7 @@ export default function Posts() {
 
         <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           {post
-            .filter((items, index) => {
+            .filter((items) => {
               if (search === "") {
                 return items;
               } else if (
@@ -102,7 +102,7 @@ export default function Posts() {
                 return items;
               }
             })
-            .map((items, index) => (
+            .map((items) => (
               <div className="relative rounded overflow-hidden shadow-lg h-full">
                 <div
                   onClick={() => handleBookmark(items.id)}
@@ -110,27 +110,27 @@ export default function Posts() {
                 >
                   <img onClick={handleClick} src={Bookmark} alt="" />
                 </div>
-                <Link key={index} to={`/detail/${items.id}`}>
+                <Link to={`/detail/${items.id}`}>
                   <div>
-                    <div>
-                      <img
-                        src={items.thumbnail}
-                        alt=""
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    <div className="px-6 pt-4">
-                      <h3 className="text-xl mb-1 font-bold line-clamp-1">{items.title}</h3>
-                    </div>
-                    <div className="px-6">
-                      <p className="text-gray-500 line-clamp-1">
-                        {dateFormat(items.createdAt, "mediumDate")},{" "}
-                        {items.user.name}
-                      </p>
-                    </div>
-                    <div className="px-6 md:my-6">
-                      <p className="line-clamp-3">{parse(items.description)}</p>
-                    </div>
+                    <img
+                      src={items.thumbnail}
+                      alt=""
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="px-6 pt-4">
+                    <h3 className="text-xl mb-1 font-bold line-clamp-1">
+                      {items.title}
+                    </h3>
+                  </div>
+                  <div className="px-6">
+                    <p className="text-gray-500 line-clamp-1">
+                      {dateFormat(items.createdAt, "mediumDate")},{" "}
+                      {items.user.name}
+                    </p>
+                  </div>
+                  <div className="px-6 md:my-6">
+                    <p className="line-clamp-3">{parse(items.description)}</p>
                   </div>
                 </Link>
               </div>

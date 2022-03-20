@@ -25,14 +25,16 @@ exports.getAllPost = async (request, response) => {
 
     response.send({
       status: "success",
+      message: "Get All Posts Success!",
       data: {
         posts: data,
       },
     });
   } catch (error) {
     console.log(error);
-    response.send({
-      status: "server error",
+    res.status(500).send({
+      status: "failed",
+      message: "Get All Post Error!",
     });
   }
 };
@@ -147,7 +149,7 @@ exports.detailPost = async (request, response) => {
           model: tb_user,
           as: "user",
           attributes: {
-            exclude: ["createdAt", "updatedAt"],
+            exclude: ["createdAt", "updatedAt", "password", "email"],
           },
         },
       ],
@@ -158,11 +160,19 @@ exports.detailPost = async (request, response) => {
       ...detail,
       thumbnail: process.env.FILE_PATH + detail.thumbnail,
     };
-    response.send({
-      status: "success",
-      message: "success get detail",
-      detail,
-    });
+
+    if (!detail) {
+      response.status(404).send({
+        status: "Failed",
+        message: "Post Not Found!",
+      });
+    } else {
+      response.send({
+        status: "success",
+        message: "Get Detail Post Success!",
+        detail,
+      });
+    }
   } catch (error) {
     console.log(error);
     response.send({
@@ -174,20 +184,23 @@ exports.detailPost = async (request, response) => {
 exports.deletePost = async (request, response) => {
   try {
     const { id } = request.params;
+
     const post = await tb_post.findOne({
       where: {
         id,
+        idUser: req.tb_user.id,
       },
-      attributes: ["thumbnail"],
     });
 
-    let thumbnailFile = "uploads/" + blog.thumbnail;
+    let thumbnailFile = "uploads/" + post.thumbnail;
 
     // Delete thumbnail file
-    fs.unlink(thumbnailFile, (err) => {
-      if (err) console.log(err);
-      else console.log("\nDeleted file: " + thumbnailFile);
-    });
+    if (post.image !== "default-user.png") {
+      fs.unlink(thumbnailFile, (err) => {
+        if (err) console.log(err);
+        else console.log("\nDeleted file: " + thumbnailFile);
+      });
+    }
 
     await tb_post.destroy({
       where: {
@@ -196,16 +209,16 @@ exports.deletePost = async (request, response) => {
     });
     response.send({
       status: "succees",
-      message: `Deleted Post id: ${id}`,
+      message: `Deleted Post Id: ${id}`,
       data: {
         id,
       },
     });
   } catch (error) {
     console.log(error);
-    response.send({
+    response.status(500).send({
       status: "failed",
-      message: "Server Error",
+      message: "Delete Post Error!",
     });
   }
 };
@@ -229,6 +242,7 @@ exports.getPostUser = async (request, response) => {
     });
 
     data = JSON.parse(JSON.stringify(data));
+
     data = data.map((item) => {
       return {
         ...item,
@@ -238,14 +252,16 @@ exports.getPostUser = async (request, response) => {
 
     response.send({
       status: "success",
+      message: "Get User Post Success!",
       data: {
         posts: data,
       },
     });
   } catch (error) {
-    response.send({
-      status: "server error",
-    });
     console.log(error);
+    res.status(500).send({
+      status: "failed",
+      message: "Get Post User Error!",
+    });
   }
 };

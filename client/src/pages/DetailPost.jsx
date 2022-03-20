@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import dateFormat from "dateformat";
-import parse from "html-react-parser";
 import DOMPurify from "dompurify";
 
 import { API } from "../config/api";
 
-const Detail = () => {
+const DetailPost = () => {
   const { id } = useParams();
   const [post, setPost] = useState([]);
   const [user, setUser] = useState([]);
 
   const getPost = async () => {
     const response = await API.get("/detail/" + id);
-    console.log(response);
+    // console.log(response);
     setPost(response.data.detail);
     setUser(response.data.detail.user);
   };
@@ -54,4 +53,4 @@ const Detail = () => {
   );
 };
 
-export default Detail;
+export default DetailPost;

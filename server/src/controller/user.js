@@ -52,13 +52,21 @@ exports.getUser = async (request, response) => {
       },
     });
 
+    if (!data) {
+      return response.status(404).send({
+        status: "failed",
+        message: "User Not Found!",
+      });
+    }
+
     response.send({
       status: "success",
+      message: "Get User Success!",
       user: data,
     });
   } catch (error) {
     console.log(error);
-    response.send({
+    response.status(500).send({
       status: "failed",
       message: "Server Error!",
     });
@@ -111,3 +119,33 @@ exports.deleteUser = async (request, response) => {
     });
   }
 };
+
+// change image
+// exports.updateUserImage = async (request, response) => {
+//   try {
+//     const { id } = request.params;
+//     const data = await tb_user.update(
+//       {
+//         image: request.file.filename,
+//       },
+//       {
+//         where: {
+//           id,
+//         },
+//       }
+//     );
+//     console.log(request.file);
+
+//     response.status(200).send({
+//       status: "Success",
+//       message: `Image User with Id: ${id} Updated`,
+//       data,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//     response.status(500).send({
+//       status: "Failed",
+//       message: "Server Error",
+//     });
+//   }
+// };

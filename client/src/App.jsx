@@ -13,6 +13,7 @@ import { UserContext } from "./context/userContext";
 import { API } from "./config/api";
 import Detail from "./pages/DetailPost";
 import Bookmark from "./pages/Bookmark";
+import EditProfile from "./pages/EditProfile";
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -78,6 +79,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/bookmark" element={<Bookmark />} />
+        <Route path="/editProfile" element={<EditProfile />} />
       </Routes>
     </div>
   );

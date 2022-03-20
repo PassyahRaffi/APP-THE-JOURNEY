@@ -49,10 +49,10 @@ const AddJourney = () => {
       if (response.data.status === "Success") {
         const alert = (
           <div
-            className="flex items-center bg-green-600 rounded-md text-white text-sm px-4 py-3"
+            className="bg-green-400 rounded-md text-center text-sm px-4 py-3 mt-4 font-bold"
             role="alert"
           >
-            <p>New Journey posted.</p>
+            <p>New Journey Success Added!</p>
           </div>
         );
         setMessage(alert);
@@ -67,14 +67,16 @@ const AddJourney = () => {
       } else {
         const alert = (
           <div
-            className="flex justify-center items-center bg-red-600 text-white text-sm font-bold px-4 py-3"
+            className="bg-red-500 text-white rounded-md text-center text-sm px-4 py-3 mt-4 font-bold"
             role="alert"
           >
-            <p>Error. Try Again</p>
+            <p>Error. Try Again!</p>
           </div>
         );
-        console.log(response);
         setMessage(alert);
+        setTimeout(() => {
+          setMessage(null);
+        }, 4000);
       }
     } catch (error) {
       console.log(error);
@@ -89,7 +91,6 @@ const AddJourney = () => {
         </div>
 
         <div>
-          {message && message}
           <form onSubmit={handleSubmit}>
             <label
               htmlFor="title"
@@ -120,10 +121,11 @@ const AddJourney = () => {
 
             <button
               type="submit"
-              className="w-full mt-4 py-2 bg-blue-600 text-white"
+              className="w-full mt-4 py-2 rounded-md bg-blue-600 text-white font-bold"
             >
               Submit
             </button>
+            {message && message}
           </form>
         </div>
       </div>

@@ -4,6 +4,8 @@ const joi = require("joi");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+const uploadServer = "http://localhost:5000/uploads/";
+
 exports.register = async (request, response) => {
   // Joi scheme
   const scheme = joi.object({
@@ -46,6 +48,7 @@ exports.register = async (request, response) => {
       phone: request.body.phone,
       email: request.body.email,
       password: hashedPassword,
+      image: "default-user.png", // new
     });
 
     const token = jwt.sign(
@@ -53,23 +56,22 @@ exports.register = async (request, response) => {
         id: tb_user.id,
         name: newUser.name,
         email: newUser.email,
+        phone: newUser.phone, /* new */
         password: newUser.password,
+        image: newUser.image, /* new */
       },
       process.env.JWT_KEY
     );
-
-    const user = {
-      name: newUser.name,
-      email: newUser.email,
-      phone: newUser.phone,
-      token,
-    };
 
     response.status(200).send({
       status: "success",
       message: "Register Success!",
       data: {
-        user
+        name: newUser.name, /* new */
+        email: newUser.email, /* new */
+        phone: newUser.phone, /* new */
+        image: newUser.image, /* new */
+        token, /* new */
       },
     });
   } catch (error) {
@@ -130,13 +132,13 @@ exports.login = async (request, response) => {
       name: existUser.name,
       email: existUser.email,
       phone: existUser.phone,
-      image: existUser.image,
+      image: uploadServer + existUser.image, /* new pending */
       token,
     };
 
     response.status(200).send({
       status: "succes",
-      message: "Success!",
+      message: "Login Success!",
       data: { user },
     });
   } catch (error) {
@@ -164,6 +166,7 @@ exports.checkAuth = async (request, response) => {
     if (!dataUser) {
       return response.status(404).send({
         status: "failed",
+        message: "User not Found", /* new */
       });
     }
 
@@ -175,12 +178,13 @@ exports.checkAuth = async (request, response) => {
           name: dataUser.name,
           email: dataUser.email,
           phone: dataUser.phone,
+          // image: uploadServer + existUser.image, /* new pending */
         },
       },
     });
   } catch (error) {
     console.log(error);
-    response.status({
+    response.status(500).status({
       status: "failed",
       message: "Server Error!",
     });
