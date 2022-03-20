@@ -121,31 +121,31 @@ exports.deleteUser = async (request, response) => {
 };
 
 // change image
-// exports.updateUserImage = async (request, response) => {
-//   try {
-//     const { id } = request.params;
-//     const data = await tb_user.update(
-//       {
-//         image: request.file.filename,
-//       },
-//       {
-//         where: {
-//           id,
-//         },
-//       }
-//     );
-//     console.log(request.file);
+exports.updateUserImage = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const data = await tb_user.update(
+      {
+        image: request.file.filename,
+      },
+      {
+        where: {
+          id,
+        },
+      }
+    );
+    console.log(request.file);
 
-//     response.status(200).send({
-//       status: "Success",
-//       message: `Image User with Id: ${id} Updated`,
-//       data,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     response.status(500).send({
-//       status: "Failed",
-//       message: "Server Error",
-//     });
-//   }
-// };
+    response.status(200).send({
+      status: "Success",
+      message: `Image User with Id: ${id} Updated`,
+      data,
+    });
+  } catch (error) {
+    console.log(error);
+    response.status(500).send({
+      status: "Failed",
+      message: "Server Error",
+    });
+  }
+};
