@@ -61,12 +61,6 @@ const Profile = () => {
     setSearchTerm(event.target.value);
   };
 
-  // useEffect(() => {
-  //   getUserJourneys();
-  //   setLoading(false);
-  //   document.title = globalTitle + "| Profile";
-  // }, []);
-
   const getPostUser = async () => {
     try {
       const response = await API.get(`/postUser/${state.user.id}`);

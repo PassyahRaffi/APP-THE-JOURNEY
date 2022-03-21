@@ -137,14 +137,14 @@ exports.updateUserImage = async (request, response) => {
     console.log(request.file);
 
     response.status(200).send({
-      status: "Success",
+      status: "success",
       message: `Image User with Id: ${id} Updated`,
       data,
     });
   } catch (error) {
     console.log(error);
     response.status(500).send({
-      status: "Failed",
+      status: "failed",
       message: "Server Error",
     });
   }

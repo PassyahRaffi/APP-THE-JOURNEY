@@ -9,7 +9,6 @@ import UserIcon from "../assets/icons/user-icon.png";
 import IconLogout from "../assets/icons/logout-icon.png";
 import IconJourney from "../assets/icons/add-journey-icon.png";
 import BookmarkIcon from "../assets/icons/bookmark-icon.png";
-import Profile from "../assets/profile.jpg";
 
 const Dropdown = () => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ const Dropdown = () => {
         <div>
           <Menu.Button>
             <img
-              src={Profile}
+              src={state.user.image} /* here */
               alt="user"
               className="h-14 w-14 object-cover rounded-full border-2 border-brand-red"
             />

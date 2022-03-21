@@ -12,18 +12,6 @@ export const LoginProvider = ({ children }) => {
   );
 };
 
-// export const AdminContext = createContext();
-
-// export const AdminProvider = ({ children }) => {
-//   const [admin, setAdmin] = useState(false);
-
-//   return (
-//     <AdminContext.Provider value={[admin, setAdmin]}>
-//       {children}
-//     </AdminContext.Provider>
-//   );
-// };
-
 export const RegisteredContext = createContext();
 
 export const RegisteredProvider = ({ children }) => {

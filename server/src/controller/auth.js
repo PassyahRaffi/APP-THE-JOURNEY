@@ -178,7 +178,7 @@ exports.checkAuth = async (request, response) => {
           name: dataUser.name,
           email: dataUser.email,
           phone: dataUser.phone,
-          // image: uploadServer + existUser.image, /* new pending */
+          image: uploadServer + dataUser.image, /* new pending */
         },
       },
     });
