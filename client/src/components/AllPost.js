@@ -8,7 +8,7 @@ import TextField from "@mui/material/TextField";
 
 import { API } from "../config/api";
 
-export default function AllPost() {
+const AllPost = () => {
   const [post, setPost] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [search, setSearch] = useState("");
@@ -140,3 +140,5 @@ export default function AllPost() {
     </div>
   );
 }
+
+export default AllPost;

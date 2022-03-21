@@ -51,7 +51,7 @@ const App = () => {
 
       // Get user data
       let payload = response.data.data.user;
-      // console.log(payload);
+
       // Get token from local storage
       payload.token = localStorage.token;
 
@@ -61,7 +61,7 @@ const App = () => {
         payload,
       });
     } catch (error) {
-      // console.log(error);
+      console.log(error);
     }
   };
   useEffect(() => {

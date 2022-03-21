@@ -17,7 +17,6 @@ const Dropdown = () => {
   const [state, dispatch] = useContext(UserContext);
 
   const logout = () => {
-    console.log(state);
     setLogin(false);
     dispatch({
       type: "LOGOUT",
@@ -28,7 +27,8 @@ const Dropdown = () => {
   return (
     <Menu as="div" className="relative z-10 flex items-center gap-4">
       <div>
-        <div>
+        <div className="flex items-center space-x-3">
+        <span>Welcome, {state.user.name}!</span>
           <Menu.Button>
             <img
               src={state.user.image} /* here */

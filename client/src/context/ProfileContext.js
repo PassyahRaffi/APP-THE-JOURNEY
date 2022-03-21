@@ -4,9 +4,9 @@ import { API } from "../config/api";
 import { LoginContext } from "./AuthContext";
 import { UserContext } from "./UserContext";
 
-export const ProfileContext = createContext();
+export const ProfileProvider = createContext();
 
-export const ProfileProvider = ({ children }) => {
+export const ProfileContext = ({ children }) => {
   const [user, setUser] = useState({});
   const [state, dispatch] = useContext(UserContext);
   const [login, setLogin] = useContext(LoginContext);
@@ -25,8 +25,8 @@ export const ProfileProvider = ({ children }) => {
   }, [login]);
 
   return (
-    <ProfileContext.Provider value={[user, setUser]}>
+    <ProfileProvider.Provider value={[user, setUser]}>
       {children}
-    </ProfileContext.Provider>
+    </ProfileProvider.Provider>
   );
 };
