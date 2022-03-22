@@ -27,8 +27,13 @@ saya gunakan untuk membersihkan HTML dan menghapus beberapa konten tag yg terbaw
 #html-react-parser
 sebuah Utilitas yang digunakan untuk mengubah string HTML menjadi komponen React .
 
---------------------------------------
+---------------------------------------
+Fungsinya adalah sebagai server yang berdiri sendiri, yang terdiri atas program HTTP Server, Seperti MySQL database, dan penerjemah bahasa yang ditulis dengan bahasa pemrograman lainnya.
 
+Structured Query Language atau SQL adalah bahasa kueri yang dirancang untuk membantu dalam pengambilan dan mengelola informasi pada sebuah database.
+
+(database management system, DBMS), adalah suatu sistem atau perangkat lunak yang dirancang untuk mengelola suatu basis data dan menjalankan operasi terhadap data yang diminta banyak pengguna.
+---------------------------------------
 
 Dependencies
 
