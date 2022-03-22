@@ -31,7 +31,7 @@ const Dropdown = () => {
         <span>Welcome, {state.user.name}!</span>
           <Menu.Button>
             <img
-              src={state.user.image} /* here */
+              src={state.user.image} /* input here */
               alt="user"
               className="h-14 w-14 object-cover rounded-full border-2 border-brand-red"
             />

@@ -15,14 +15,14 @@ const {
   getUser,
   updateUser,
   deleteUser,
-  updateUserImage /* NEW */
+  updateUserImage /* input here */
 } = require("../controller/user");
 router.post("/user", addUsers);
 router.get("/users", getUsers);
 router.get("/getUser/:id", getUser);
 router.patch("/user/:id", auth, updateUser);
 router.delete("/user/:id", auth, deleteUser);
-/* NEW */
+/* input here */
 router.patch("/user/edit/image/:id", uploadFile("image"), updateUserImage);
 
 const {

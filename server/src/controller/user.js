@@ -73,6 +73,30 @@ exports.getUser = async (request, response) => {
   }
 };
 
+exports.deleteUser = async (request, response) => {
+  try {
+    const { id } = request.params;
+
+    await tb_user.destroy({
+      where: {
+        id,
+      },
+    });
+
+    response.send({
+      status: "success",
+      message: `Delete User Id: ${id} Success!`,
+    });
+  } catch (error) {
+    console.log(error);
+    response.send({
+      status: "failed",
+      message: "Server Error!",
+    });
+  }
+};
+
+// exports change data user
 exports.updateUser = async (request, response) => {
   try {
     const { id } = request.params;
@@ -97,30 +121,7 @@ exports.updateUser = async (request, response) => {
   }
 };
 
-exports.deleteUser = async (request, response) => {
-  try {
-    const { id } = request.params;
-
-    await tb_user.destroy({
-      where: {
-        id,
-      },
-    });
-
-    response.send({
-      status: "success",
-      message: `Delete User Id: ${id} Success!`,
-    });
-  } catch (error) {
-    console.log(error);
-    response.send({
-      status: "failed",
-      message: "Server Error!",
-    });
-  }
-};
-
-// change image
+// exports change image
 exports.updateUserImage = async (request, response) => {
   try {
     const { id } = request.params;
@@ -137,14 +138,14 @@ exports.updateUserImage = async (request, response) => {
     console.log(request.file);
 
     response.status(200).send({
-      status: "success",
+      status: "Success",
       message: `Image User with Id: ${id} Updated`,
       data,
     });
   } catch (error) {
     console.log(error);
     response.status(500).send({
-      status: "failed",
+      status: "Failed",
       message: "Server Error",
     });
   }

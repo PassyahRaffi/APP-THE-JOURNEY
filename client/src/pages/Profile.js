@@ -8,12 +8,14 @@ import parse from "html-react-parser";
 const Profile = () => {
   const [preview, setPreview] = useState(null);
   const [post, setPost] = useState([]);
-  const [user, setUser] = useState([]); /* new */
+  const [user, setUser] = useState([]);
   const [state, dispatch] = useContext(UserContext);
+  // create useState form setForm
   const [form, setForm] = useState({
     image: "",
   });
 
+  // create variabel image form
   const { image } = form;
 
   const handleImageChange = (e) => {
@@ -41,7 +43,8 @@ const Profile = () => {
           "Content-type": "multipart/form-data",
         },
       };
-
+      
+      // create form data image
       const formData = new FormData();
       formData.set("image", form.image[0], form.image[0].name);
 
@@ -57,6 +60,7 @@ const Profile = () => {
     }
   };
 
+  // create function handleChange
   const handleChange = (event) => {
     setSearchTerm(event.target.value);
   };
@@ -65,14 +69,14 @@ const Profile = () => {
     try {
       const response = await API.get(`/postUser/${state.user.id}`);
       setPost(response.data.data.posts);
-      setUser(response.data.data.posts.user); /* new */
+      setUser(response.data.data.posts.user);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getPostUser([]); /* new */
+    getPostUser([]);
   }, []);
 
   return (
@@ -80,6 +84,7 @@ const Profile = () => {
       <div className="flex justify-center">
         <h1 className="text-3xl font-bold">My Profile</h1>
       </div>
+      {/* create styling form for handleChange */}
       <form className="text-center flex justify-center pt-20" onSubmit={handleImageSubmit}>
         <label
           htmlFor="image"
@@ -108,6 +113,7 @@ const Profile = () => {
         </label>
       </form>
 
+      {/* create styling button edit profile */}
       <div className="flex justify-center pt-5 pb-2">
         <Link to="/editProfile">
           <span

@@ -4,6 +4,7 @@ const joi = require("joi");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// input variabel upload server
 const uploadServer = "http://localhost:5000/uploads/";
 
 exports.register = async (request, response) => {
@@ -48,7 +49,7 @@ exports.register = async (request, response) => {
       phone: request.body.phone,
       email: request.body.email,
       password: hashedPassword,
-      image: "default-user.png", // new
+      image: "default-user.png", /* input here */
     });
 
     const token = jwt.sign(
@@ -56,9 +57,9 @@ exports.register = async (request, response) => {
         id: tb_user.id,
         name: newUser.name,
         email: newUser.email,
-        phone: newUser.phone, /* new */
+        phone: newUser.phone,
         password: newUser.password,
-        image: newUser.image, /* new */
+        image: newUser.image, /* input here */
       },
       process.env.JWT_KEY
     );
@@ -67,11 +68,11 @@ exports.register = async (request, response) => {
       status: "success",
       message: "Register Success!",
       data: {
-        name: newUser.name, /* new */
-        email: newUser.email, /* new */
-        phone: newUser.phone, /* new */
-        image: newUser.image, /* new */
-        token, /* new */
+        name: newUser.name,
+        email: newUser.email,
+        phone: newUser.phone,
+        image: newUser.image, /* input here */
+        token,
       },
     });
   } catch (error) {
@@ -132,7 +133,7 @@ exports.login = async (request, response) => {
       name: existUser.name,
       email: existUser.email,
       phone: existUser.phone,
-      image: uploadServer + existUser.image, /* new pending */
+      image: uploadServer + existUser.image, /* add here */
       token,
     };
 
@@ -166,7 +167,7 @@ exports.checkAuth = async (request, response) => {
     if (!dataUser) {
       return response.status(404).send({
         status: "failed",
-        message: "User not Found", /* new */
+        message: "User not Found",
       });
     }
 
@@ -178,7 +179,7 @@ exports.checkAuth = async (request, response) => {
           name: dataUser.name,
           email: dataUser.email,
           phone: dataUser.phone,
-          image: uploadServer + dataUser.image, /* new pending */
+          image: uploadServer + dataUser.image, /* add here */
         },
       },
     });
