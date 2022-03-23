@@ -21,7 +21,6 @@ export default function EditProfile() {
     });
   };
 
-
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
@@ -51,7 +50,7 @@ export default function EditProfile() {
       setTimeout(() => {
         setMessage(null);
       }, 4000);
-      navigate("/profile")
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -64,45 +63,63 @@ export default function EditProfile() {
       </h1>
       <form onSubmit={handleSubmit}>
         <div className="space-y-6 mb-8">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            required
-            onChange={handleChange}
-            onInvalid={(e) => e.target.setCustomValidity("Name required.")}
-            onInput={(e) => e.target.setCustomValidity("")}
-            placeholder="Name"
-            value={name}
-            className="w-full p-3 outline outline-2 outline-gray-400 focus:outline-black rounded-md bg-gray-200"
-          />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            required
-            onChange={handleChange}
-            onInvalid={(e) => e.target.setCustomValidity("Email required.")}
-            onInput={(e) => e.target.setCustomValidity("")}
-            placeholder="Email"
-            value={email}
-            className="w-full p-3 outline outline-2 outline-gray-400 focus:outline-black rounded-md bg-gray-200"
-          />
-          <input
-            type="number"
-            name="phone"
-            id="phone"
-            onChange={handleChange}
-            onInvalid={(e) => e.target.setCustomValidity("Phone required.")}
-            onInput={(e) => e.target.setCustomValidity("")}
-            placeholder="Phone"
-            value={phone}
-            className="w-full p-3 outline outline-2 outline-gray-400 focus:outline-black rounded-md bg-gray-200"
-          />
+          <label htmlFor="name" className="block">
+          <span class="block text-sm font-medium text-slate-700 md:mb-2">
+              Name
+            </span>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              required
+              onChange={handleChange}
+              onInvalid={(e) => e.target.setCustomValidity("Name required.")}
+              onInput={(e) => e.target.setCustomValidity("")}
+              placeholder="Input Name"
+              value={name}
+              className="w-full p-3 outline outline-2 outline-gray-400 focus:outline-black rounded-md bg-gray-200"
+            />
+          </label>
+
+          <label htmlFor="name" className="block">
+          <span class="block text-sm font-medium text-slate-700 md:mb-2">
+              Email
+            </span>
+            <input
+              disabled
+              type="email"
+              name="email"
+              id="email"
+              required
+              onChange={handleChange}
+              onInvalid={(e) => e.target.setCustomValidity("Email required.")}
+              onInput={(e) => e.target.setCustomValidity("")}
+              placeholder="Input Email"
+              value={email}
+              className="cursor-not-allowed disabled:text-slate-500 disabled:shadow-none w-full p-3 outline outline-2 outline-gray-400 focus:outline-black rounded-md bg-gray-200"
+            />
+          </label>
+
+          <label htmlFor="name" className="block">
+          <span class="block text-sm font-medium text-slate-700 md:mb-2">
+              Phone Number
+            </span>
+            <input
+              type="number"
+              name="phone"
+              id="phone"
+              onChange={handleChange}
+              onInvalid={(e) => e.target.setCustomValidity("Phone required.")}
+              onInput={(e) => e.target.setCustomValidity("")}
+              placeholder="Input Phone"
+              value={phone}
+              className="w-full p-3 outline outline-2 outline-gray-400 focus:outline-black rounded-md bg-gray-200"
+            />
+          </label>
         </div>
         <button
           type="submit"
-          className="w-full py-2 rounded-md text-center font-bold bg-blue-600 text-white"
+          className="cursor-progress w-full py-2 rounded-md text-center font-bold bg-blue-600 text-white"
         >
           Save Changes
         </button>

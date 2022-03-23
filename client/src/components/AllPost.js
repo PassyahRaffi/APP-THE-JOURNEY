@@ -40,7 +40,6 @@ const AllPost = () => {
   };
 
   const handleBookmark = async (journeyID) => {
-    // await API.post("/addBookmark");
     try {
       const config = {
         headers: {
