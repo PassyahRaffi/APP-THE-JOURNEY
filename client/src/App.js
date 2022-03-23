@@ -13,6 +13,7 @@ import { UserContext } from "./context/userContext";
 import { API } from "./config/api";
 import Detail from "./pages/DetailPost";
 import Bookmark from "./pages/Bookmark";
+// import page edit profile
 import EditProfile from "./pages/EditProfile";
 
 if (localStorage.token) {
@@ -79,6 +80,7 @@ const App = () => {
         <Route path="/profile" element={<Profile />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/bookmark" element={<Bookmark />} />
+        {/* insert routing page edit profile */}
         <Route path="/editProfile" element={<EditProfile />} />
       </Routes>
     </div>
