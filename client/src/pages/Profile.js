@@ -66,11 +66,6 @@ const Profile = () => {
     }
   };
 
-  // create function handleChange
-  const handleChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
   const getPostUser = async () => {
     try {
       const response = await API.get(`/postUser/${state.user.id}`);
@@ -91,7 +86,7 @@ const Profile = () => {
         <h1 className="text-3xl font-bold">My Profile</h1>
       </div>
 
-      {/* create styling form for handleImageSubmit & handleChange */}
+      {/* create styling form for handleImageSubmit */}
       <form
         className="text-center flex justify-center pt-20"
         // insert function handle image submit

@@ -58,7 +58,6 @@ export default function EditProfile() {
       setTimeout(() => {
         setMessage(null);
       }, 4000);
-      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
